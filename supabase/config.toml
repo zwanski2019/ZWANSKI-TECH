@@ -1,9 +1,6 @@
 
 project_id = "ceihcnfngpmrtqunhaey"
 
-[functions.websocket-chat]
-verify_jwt = false
-
 [functions.verify-hcaptcha]
 verify_jwt = false
 

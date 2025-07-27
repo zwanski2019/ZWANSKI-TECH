@@ -45,7 +45,6 @@ const Index = lazy(() =>
 );
 const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
-const Chat = lazy(() => import("./pages/Chat"));
 const Profile = lazy(() => import("./pages/Profile"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ComputerModel = lazy(() => import("./pages/ComputerModel"));
@@ -81,7 +80,6 @@ const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 import { LanguageDetectionNotice } from "./components/LanguageDetectionNotice";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-import ChatWidget from "./components/ChatWidget";
 import { AccessibilityEnhancer } from "./components/AccessibilityEnhancer";
 import { usePerformanceMonitoring, useMemoryMonitoring } from "./hooks/usePerformanceMonitoring";
 import Preloader from "./components/Preloader";
@@ -153,7 +151,6 @@ function App() {
                           <Route path="/about" element={<About />} />
                           <Route path="/computer-model" element={<ComputerModel />} />
                           <Route path="/3d" element={<ComputerModel />} />
-                          <Route path="/chat" element={<Chat />} />
                           <Route path="/newsletter" element={<Newsletter />} />
                           <Route path="/academy" element={<Academy />} />
                           <Route path="/jobs" element={<Jobs />} />
@@ -203,7 +200,6 @@ function App() {
                       <AccessibilityEnhancer />
                       <LanguageDetectionNotice />
                       <ScrollToTopButton />
-                      <ChatWidget />
                       <Toaster />
                     </ErrorBoundary>
                   </BrowserRouter>
