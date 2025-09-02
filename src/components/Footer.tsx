@@ -216,23 +216,60 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/fix" className="text-muted-foreground hover:text-primary transition-colors">
-                    Fix
+                  <Link to="/support" className="text-muted-foreground hover:text-primary transition-colors">
+                    Get Help
                   </Link>
                 </li>
                 <li>
-                  <Link to="/build" className="text-muted-foreground hover:text-primary transition-colors">
-                    Build
+                  <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                    Build Solutions
                   </Link>
                 </li>
                 <li>
-                  <Link to="/secure" className="text-muted-foreground hover:text-primary transition-colors">
-                    Secure
+                  <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                    Security Services
                   </Link>
                 </li>
                 <li>
                   <Link to="/support" className="text-muted-foreground hover:text-primary transition-colors">
                     Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Community */}
+            <div>
+              <h3 className="font-semibold mb-3">Community</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/freelancers" className="text-muted-foreground hover:text-primary transition-colors">
+                    Freelancers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/post-job" className="text-muted-foreground hover:text-primary transition-colors">
+                    Post Job
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/newsletter" className="text-muted-foreground hover:text-primary transition-colors">
+                    Newsletter
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/imei-check" className="text-muted-foreground hover:text-primary transition-colors">
+                    IMEI Check
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/api-explorer" className="text-muted-foreground hover:text-primary transition-colors">
+                    API Explorer
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/search" className="text-muted-foreground hover:text-primary transition-colors">
+                    Search
                   </Link>
                 </li>
               </ul>
