@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Sparkles } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 import { Form, Button } from "@/components/heroui";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -39,21 +40,64 @@ export default function NewsletterForm() {
     setIsSubmitting(true);
     
     try {
-      // This is where we'll integrate with Supabase (after connection is set up)
-      console.log("Form data to submit:", data);
-      
-      // Mock submission for now - will be replaced with actual Supabase API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      toast.success("Successfully subscribed to the newsletter!", {
-        description: "Thank you for joining our magical community!",
-      });
+      // Check if email already exists
+      const { data: existing, error: checkError } = await supabase
+        .from('newsletter_subscriptions')
+        .select('id, is_active')
+        .eq('email', data.email)
+        .maybeSingle();
+
+      if (checkError) {
+        console.error('Error checking existing subscription:', checkError);
+        throw new Error('Failed to check subscription status');
+      }
+
+      if (existing) {
+        if (existing.is_active) {
+          toast.error("Already subscribed", {
+            description: "This email is already subscribed to our newsletter.",
+          });
+          return;
+        } else {
+          // Reactivate existing subscription
+          const { error: updateError } = await supabase
+            .from('newsletter_subscriptions')
+            .update({ 
+              is_active: true,
+              name: data.name,
+              subscribed_at: new Date().toISOString(),
+              unsubscribe_token: crypto.randomUUID()
+            })
+            .eq('email', data.email);
+
+          if (updateError) throw updateError;
+
+          toast.success("Subscription reactivated!", {
+            description: "Welcome back! You're now subscribed to our newsletter.",
+          });
+        }
+      } else {
+        // Create new subscription
+        const { error: insertError } = await supabase
+          .from('newsletter_subscriptions')
+          .insert({
+            email: data.email,
+            name: data.name,
+            is_active: true
+          });
+
+        if (insertError) throw insertError;
+
+        toast.success("Successfully subscribed to the newsletter!", {
+          description: "Thank you for joining our community! We'll keep you updated with the latest insights.",
+        });
+      }
       
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
       toast.error("Failed to subscribe", {
-        description: "Please try again later.",
+        description: error.message || "Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
