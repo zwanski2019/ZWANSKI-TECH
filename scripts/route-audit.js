@@ -41,7 +41,7 @@ const ROUTES = [
 
 // Footer links to check (external)
 const FOOTER_LINKS = [
-  'https://github.com/zwanski2019/ZWANSKI-TECH',
+  'https://github.com/zwanski01',
   'https://www.linkedin.com/company/zwanski-tech',
   'https://www.facebook.com/ethicalhackerzwanskitech',
   'https://t.me/zwanski_tech'

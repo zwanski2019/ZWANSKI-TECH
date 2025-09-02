@@ -74,7 +74,7 @@ export default function Footer() {
                       </svg>
                     </a>
                     <a 
-                      href="https://github.com/zwanski2019"
+                      href="https://github.com/zwanski01"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -271,6 +271,16 @@ export default function Footer() {
                   <Link to="/search" className="text-muted-foreground hover:text-primary transition-colors">
                     Search
                   </Link>
+                </li>
+                <li>
+                  <a 
+                    href="https://github.com/zwanski01" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    GitHub
+                  </a>
                 </li>
               </ul>
             </div>
