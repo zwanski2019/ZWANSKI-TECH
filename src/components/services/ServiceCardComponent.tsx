@@ -24,7 +24,7 @@ const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
 
   return (
     <Card 
-      className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-slate-700/50 hover:border-orange-500/60 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-500/25 hover:-translate-y-4 animate-on-scroll overflow-hidden"
+      className="card-safe group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-slate-700/50 hover:border-orange-500/60 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-500/25 hover:-translate-y-4 animate-on-scroll overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ animationDelay: `${index * 100}ms` }}
@@ -81,7 +81,8 @@ const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
           <Button 
             variant="ghost" 
             size="sm" 
-            className="flex-1 group/btn hover:bg-orange-500/20 text-slate-300 hover:text-orange-300 border border-slate-600 hover:border-orange-500/60 transition-all duration-300"
+            className="flex-1 group/btn hover:bg-orange-500/20 text-slate-300 hover:text-orange-300 border border-slate-600 hover:border-orange-500/60 transition-all duration-300 touch-optimized"
+            aria-label={`Learn more about ${service.title}`}
           >
             {t("services.learnMore")}
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -89,16 +90,17 @@ const ServiceCardComponent = ({ service, index }: ServiceCardProps) => {
           <Button 
             variant="ghost" 
             size="sm" 
-            className="px-3 hover:bg-orange-500/20 text-slate-300 hover:text-orange-300 border border-slate-600 hover:border-orange-500/60 transition-all duration-300"
+            className="px-3 hover:bg-orange-500/20 text-slate-300 hover:text-orange-300 border border-slate-600 hover:border-orange-500/60 transition-all duration-300 touch-optimized"
+            aria-label={`External link for ${service.title}`}
           >
             <ExternalLink className="h-4 w-4" />
           </Button>
         </div>
       </CardContent>
       
-      {/* Enhanced floating elements */}
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-orange-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-125"></div>
-      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-red-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-125"></div>
+      {/* Enhanced floating elements - constrained */}
+      <div className="absolute -top-10 -right-10 w-20 h-20 bg-orange-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-125 pointer-events-none"></div>
+      <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-red-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-125 pointer-events-none"></div>
       
       {/* Bottom gradient line with animation */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-x-0 group-hover:scale-x-100 origin-center"></div>

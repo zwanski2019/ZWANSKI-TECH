@@ -118,7 +118,7 @@ const Services = () => {
             onClick={() => setSelectedService(null)}
           >
             <div 
-              className="bg-background rounded-2xl w-full max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl border border-border/50 animate-scale-in"
+              className="bg-background rounded-2xl w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl border border-border/50 animate-scale-in"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Mobile-friendly header with close button */}

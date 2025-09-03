@@ -46,7 +46,7 @@ const ApiExplorer: React.FC = () => {
   }, [apis, query, category, auth, httpsOnly]);
 
   return (
-    <div className="space-y-6">
+    <div className="overflow-safe space-y-6 w-full max-w-full">
       <div className="sticky top-0 bg-background z-10 py-4 space-y-4">
         <SearchBar query={query} onChange={setQuery} />
         <FilterPanel

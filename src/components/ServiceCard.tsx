@@ -60,6 +60,7 @@ const ServiceCard = ({ id, title, description, price, icon, onSelect }: ServiceC
           onClick={onSelect}
           className="w-full touch-optimized"
           variant="solid"
+          aria-label={`Request ${title} service`}
         >
           Request Service
         </Button>

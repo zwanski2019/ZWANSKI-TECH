@@ -1,0 +1,201 @@
+/* Enhanced Responsive System - Additional breakpoints and utilities */
+
+/* Extra small devices and edge cases */
+@media (max-width: 360px) {
+  .responsive-grid-2,
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 2vw, 1rem);
+  }
+  
+  .responsive-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* Compact text for very small screens */
+  .fluid-text-display-1 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+  }
+  
+  .fluid-text-display-2 {
+    font-size: clamp(1.75rem, 5vw, 2rem);
+  }
+}
+
+/* Landscape mobile optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section-responsive {
+    padding-top: clamp(1rem, 4vw, 3rem);
+    padding-bottom: clamp(1rem, 4vw, 3rem);
+  }
+  
+  /* Reduce modal heights on landscape */
+  .modal-landscape {
+    max-height: 90vh;
+  }
+  
+  /* Horizontal navigation improvements */
+  .nav-landscape {
+    height: 48px;
+  }
+}
+
+/* Enhanced tablet breakpoint */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .responsive-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Tablet-specific touch targets */
+  .touch-optimized {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Large tablet and small desktop */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .responsive-grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+  .responsive-container {
+    max-width: 1600px;
+  }
+  
+  .responsive-grid-4 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  /* Prevent content from becoming too spread out */
+  .content-max-width {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* Interactive elements enhancement */
+.interactive-safe {
+  position: relative;
+  overflow: visible;
+  touch-action: manipulation;
+}
+
+.interactive-safe::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  z-index: -1;
+}
+
+/* Safe hover states for touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .hover-safe:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hover-safe:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Enhanced modal responsiveness */
+.modal-responsive {
+  width: 95vw;
+  max-width: 400px;
+}
+
+@media (min-width: 640px) {
+  .modal-responsive {
+    width: 90vw;
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-responsive {
+    width: 80vw;
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .modal-responsive {
+    width: 70vw;
+    max-width: 1000px;
+  }
+}
+
+/* Grid gap responsive system */
+.gap-responsive {
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.gap-responsive-lg {
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Text scaling for better readability */
+.text-responsive-sm {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+}
+
+.text-responsive {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
+
+/* Enhanced overflow prevention */
+.overflow-prevention {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.overflow-prevention * {
+  max-width: 100%;
+}
+
+/* Container query support where available */
+@supports (container-type: inline-size) {
+  .container-responsive {
+    container-type: inline-size;
+  }
+  
+  @container (max-width: 400px) {
+    .container-responsive .grid-adaptive {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @container (min-width: 401px) and (max-width: 800px) {
+    .container-responsive .grid-adaptive {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @container (min-width: 801px) {
+    .container-responsive .grid-adaptive {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+}

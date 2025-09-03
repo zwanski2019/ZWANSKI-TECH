@@ -60,19 +60,19 @@ export default function Projects() {
           A showcase of my recent work, highlighting my skills in web development, application design, and problem-solving.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="responsive-grid responsive-grid-2 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <div
               key={project.id}
               id={project.id}
-              className="card-transform-3d bg-card rounded-xl overflow-hidden shadow-3d border border-border relative group"
+              className="card-safe bg-card rounded-xl overflow-hidden shadow-3d border border-border relative group"
             >
               {/* Project color accent */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/5 opacity-50"></div>
               
-              {/* 3D effect elements */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity"></div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity"></div>
+              {/* 3D effect elements - constrained within card */}
+              <div className="absolute -top-5 -right-5 w-20 h-20 bg-primary/10 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              <div className="absolute -bottom-5 -left-5 w-20 h-20 bg-secondary/10 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               
               <div className="p-6 relative">
                 <div className="flex justify-between items-start mb-4">
@@ -86,7 +86,7 @@ export default function Projects() {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full hover:bg-muted transition-colors"
+                        className="p-2 rounded-full hover:bg-muted transition-colors touch-optimized"
                         aria-label={`Visit ${project.title} website`}
                       >
                         <ExternalLink className="h-4 w-4" />
@@ -97,7 +97,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full hover:bg-muted transition-colors"
+                        className="p-2 rounded-full hover:bg-muted transition-colors touch-optimized"
                         aria-label={`${project.title} GitHub repository`}
                       >
                         <Github className="h-4 w-4" />
