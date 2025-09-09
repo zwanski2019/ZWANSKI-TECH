@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { TurnstileWidget } from '@/components/TurnstileWidget';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -36,25 +37,21 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Verify Turnstile token
-      const verifyResponse = await fetch('/api/verify-turnstile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: turnstileToken })
+      // Verify Turnstile token using Supabase function
+      const { error: verifyError } = await supabase.functions.invoke('verify-turnstile', {
+        body: { token: turnstileToken }
       });
 
-      if (!verifyResponse.ok) {
+      if (verifyError) {
         throw new Error('Security verification failed');
       }
 
-      // Submit contact form
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      // Submit contact form using Supabase function
+      const { error: contactError } = await supabase.functions.invoke('contact', {
+        body: formData
       });
 
-      if (!response.ok) {
+      if (contactError) {
         throw new Error('Failed to send message');
       }
 

@@ -1,6 +1,6 @@
 const BLOGGER_API_URL = 'https://www.googleapis.com/blogger/v3';
-const BLOG_ID = '1865195035349515836'; // Your actual blog ID
-const API_KEY = 'AIzaSyD0OTN6ul9ClQSAmgBYjDL5YXoqGPWo-1g'; // Your Blogger API key
+const BLOG_ID = import.meta.env.VITE_BLOGGER_BLOG_ID || '1865195035349515836';
+const API_KEY = import.meta.env.VITE_BLOGGER_API_KEY;
 
 export interface BlogPost {
   id: string;
@@ -29,6 +29,11 @@ export interface BloggerResponse {
 
 export const bloggerApi = {
   async getPosts(pageToken?: string, maxResults: number = 12): Promise<BloggerResponse> {
+    if (!API_KEY) {
+      console.warn('Blogger API key not configured');
+      return { items: [] };
+    }
+    
     try {
       const params = new URLSearchParams({
         key: API_KEY,
@@ -61,6 +66,11 @@ export const bloggerApi = {
   },
 
   async getPost(postId: string): Promise<BlogPost | null> {
+    if (!API_KEY) {
+      console.warn('Blogger API key not configured');
+      return null;
+    }
+    
     try {
       const response = await fetch(
         `${BLOGGER_API_URL}/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}&fetchImages=true&fetchBodies=true`
@@ -78,6 +88,11 @@ export const bloggerApi = {
   },
 
   async searchPosts(query: string, maxResults: number = 12): Promise<BloggerResponse> {
+    if (!API_KEY) {
+      console.warn('Blogger API key not configured');
+      return { items: [] };
+    }
+    
     try {
       const params = new URLSearchParams({
         key: API_KEY,
