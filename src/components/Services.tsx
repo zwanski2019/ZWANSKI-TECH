@@ -125,133 +125,96 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Enhanced Service Detail Modal */}
+        {/* Compact Service Modal - No Scrolling */}
         {selectedService && (
           <div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={() => setSelectedService(null)}
           >
             <div 
-              className="bg-background rounded-3xl w-full max-w-sm sm:max-w-md lg:max-w-3xl xl:max-w-5xl max-h-[90vh] overflow-hidden shadow-2xl border border-border/20 animate-scale-in"
+              className="bg-background rounded-2xl w-full max-w-md sm:max-w-lg lg:max-w-2xl shadow-2xl border border-border/20 animate-scale-in overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Mobile-optimized header */}
-              <div className="sticky top-0 z-10">
-                <div className={`bg-gradient-to-r ${selectedService.color} relative overflow-hidden`}>
-                  {/* Animated background effects */}
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse" />
-                    <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+              {/* Compact Header */}
+              <div className={`bg-gradient-to-r ${selectedService.color} relative px-6 py-8`}>
+                {/* Close button */}
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="absolute top-4 right-4 text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all duration-200 touch-manipulation"
+                  aria-label="Close"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+                
+                {/* Header content */}
+                <div className="flex items-center gap-4 text-white">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <selectedService.icon className="h-7 w-7 text-white" />
                   </div>
-                  
-                  {/* Close button - optimized for touch */}
-                  <button
-                    onClick={() => setSelectedService(null)}
-                    className="absolute top-4 right-4 text-white hover:bg-white/20 rounded-full p-3 transition-all duration-200 hover:scale-110 z-20 touch-manipulation"
-                    aria-label="Close modal"
-                  >
-                    <X className="h-6 w-6" />
-                  </button>
-                  
-                  {/* Header content */}
-                  <div className="relative z-10 p-6 sm:p-8 text-white">
-                    <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
-                      <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/30 shadow-xl">
-                        <selectedService.icon className="h-10 w-10 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight mb-3">{selectedService.title}</h2>
-                        {selectedService.badge && (
-                          <span className="inline-block bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-xl backdrop-blur-sm border border-white/30">
-                            {selectedService.badge}
-                          </span>
-                        )}
-                      </div>
-                    </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">{selectedService.title}</h2>
+                    {selectedService.badge && (
+                      <span className="inline-block bg-white/20 text-white text-sm px-3 py-1 rounded-lg mt-2">
+                        {selectedService.badge}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Scrollable content with better mobile optimization */}
-              <div className="overflow-y-auto max-h-[calc(90vh-200px)]">
-                <div className="p-6 sm:p-8 lg:p-12">
-                  {/* Description */}
-                  <div className="mb-8">
-                    <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-                      {selectedService.description}
-                    </p>
-                  </div>
+              {/* Content - No Scrolling */}
+              <div className="p-6 space-y-6">
+                {/* Description */}
+                <p className="text-muted-foreground leading-relaxed">
+                  {selectedService.description}
+                </p>
 
-                  {/* Features Grid - more responsive */}
-                  <div className="mb-10">
-                    <h3 className="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-3">
-                      <CheckCircle className="h-6 w-6 text-green-500" />
-                      What's Included
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {selectedService.features.map((feature, index) => (
-                        <div 
-                          key={index} 
-                          className="flex items-start gap-4 p-4 rounded-xl bg-secondary/30 hover:bg-secondary/50 transition-all duration-300 group border border-secondary/20"
-                        >
-                          <div className="w-2 h-2 bg-primary rounded-full mt-3 group-hover:scale-125 transition-transform duration-200 flex-shrink-0" />
-                          <span className="text-sm sm:text-base leading-relaxed">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+                {/* Key Features - Compact */}
+                <div>
+                  <h3 className="font-semibold mb-3 flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    Key Features
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedService.features.slice(0, 4).map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Service Highlights - improved mobile layout */}
-                  <div className="mb-10">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 sm:p-8 bg-gradient-to-br from-secondary/20 to-secondary/40 rounded-2xl border border-secondary/30">
-                      <div className="text-center group hover:scale-105 transition-transform duration-300">
-                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors shadow-lg">
-                          <Clock className="h-7 w-7 text-primary" />
-                        </div>
-                        <div className="font-bold text-base sm:text-lg">Quick Response</div>
-                        <div className="text-sm text-muted-foreground mt-2">24-48 hours</div>
-                      </div>
-                      <div className="text-center group hover:scale-105 transition-transform duration-300">
-                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors shadow-lg">
-                          <Star className="h-7 w-7 text-primary" />
-                        </div>
-                        <div className="font-bold text-base sm:text-lg">Quality Assured</div>
-                        <div className="text-sm text-muted-foreground mt-2">100% Guaranteed</div>
-                      </div>
-                      <div className="text-center group hover:scale-105 transition-transform duration-300">
-                        <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors shadow-lg">
-                          <Phone className="h-7 w-7 text-primary" />
-                        </div>
-                        <div className="font-bold text-base sm:text-lg">24/7 Support</div>
-                        <div className="text-sm text-muted-foreground mt-2">Always Available</div>
-                      </div>
-                    </div>
+                {/* Quick Stats */}
+                <div className="grid grid-cols-3 gap-4 py-4 bg-secondary/20 rounded-xl">
+                  <div className="text-center">
+                    <Clock className="h-5 w-5 text-primary mx-auto mb-1" />
+                    <div className="text-xs font-medium">24-48h</div>
                   </div>
+                  <div className="text-center">
+                    <Star className="h-5 w-5 text-primary mx-auto mb-1" />
+                    <div className="text-xs font-medium">Premium</div>
+                  </div>
+                  <div className="text-center">
+                    <Shield className="h-5 w-5 text-primary mx-auto mb-1" />
+                    <div className="text-xs font-medium">Secure</div>
+                  </div>
+                </div>
 
-                  {/* Call to Action - mobile-optimized */}
-                  <div className="text-center bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20">
-                    <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">Ready to get started?</h3>
-                    <p className="text-muted-foreground mb-8 text-base leading-relaxed max-w-md mx-auto">
-                      Contact us on WhatsApp for a free consultation and personalized quote.
-                    </p>
-                    
-                    <div className="flex flex-col gap-4 items-center">
-                      <a
-                        href={`https://wa.me/21694934141?text=Hi! I'm interested in your ${selectedService.title} service. Can you provide more details?`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl w-full sm:w-auto justify-center touch-manipulation text-lg"
-                      >
-                        <MessageCircle className="h-6 w-6" />
-                        Chat on WhatsApp
-                      </a>
-                      
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Phone className="h-4 w-4" />
-                        <span>Or call: <span className="font-bold text-foreground">+216 94 934 141</span></span>
-                      </div>
-                    </div>
-                  </div>
+                {/* CTA - Compact */}
+                <div className="space-y-3">
+                  <a
+                    href={`https://wa.me/21694934141?text=Hi! I'm interested in your ${selectedService.title} service.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] touch-manipulation"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Get Quote on WhatsApp
+                  </a>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Free consultation • Quick response • No commitment
+                  </p>
                 </div>
               </div>
             </div>
